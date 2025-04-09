@@ -78,6 +78,19 @@ class TestBowlingGame(unittest.TestCase):
         self.roll_many(15, 0)
         self.assertEqual(32, self.game.score())
 
+    
+    def test_10th_frame_strike(self):
+        """Test getting a strkie in the 10th frame,
+          this gives the player 2 bonus rolls """
+        
+        self.roll_many(18, 0)
+
+        self.game.roll(10)
+        self.game.roll(3)
+        self.game.roll(4)
+        self.assertEqual(17, self.game.score())
+
+
 
 
     
