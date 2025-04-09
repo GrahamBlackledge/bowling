@@ -30,6 +30,16 @@ class TestBowlingGame(unittest.TestCase):
         # Expected score: 20 (1 pin × 20 rolls)
         self.assertEqual(20, self.game.score())
 
+    def test_single_strike(self):
+        """Test that a single strike is scored correctly
+        Strike +> 10 and next 2 rolls as a bonmus"""
+        self.game.roll(10)
+        self.game.roll(3)
+        self.game.roll(4)
+        self.roll_many(16, 0)
+        # Frame 1: 10 + 3 + 4 = 17, Frame 2: 3 + 4 = 7, total = 24
+        self.assertEqual(24, self.game.score())
+
 
 if __name__ == "__main__":
     unittest.main()
