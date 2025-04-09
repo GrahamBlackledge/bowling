@@ -47,9 +47,10 @@ class TestBowlingGame(unittest.TestCase):
         """
         self.game.roll(10)
         self.game.roll(10)
+
         self.game.roll(3)
         self.game.roll(4)
-        self.row_many(14, 0)
+        self.roll_many(14, 0)
         self.assertEqual(47, self.game.score())
 
     def test_single_spare(self):
@@ -58,10 +59,28 @@ class TestBowlingGame(unittest.TestCase):
         Spare => 10 plus next roll as a bonus"""
 
         self.game.roll(5)
-        self.game.roll(5)  
+        self.game.roll(5) 
+
         self.game.roll(3)
         self.roll_many(17, 0)
         self.assertEqual(16, self.game.score())
+
+    def test_two_consecutive_spares(self):
+        """ Test that two spares in a row will be scored correctly """
+
+        self.game.roll(7)
+        self.game.roll(3)
+
+        self.game.roll(6)
+        self.game.roll(4)
+
+        self.game.roll(3)
+        self.roll_many(15, 0)
+        self.assertEqual(32, self.game.score())
+
+
+
+    
 
 
 if __name__ == "__main__":
