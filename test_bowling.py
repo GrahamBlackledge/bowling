@@ -41,5 +41,17 @@ class TestBowlingGame(unittest.TestCase):
         self.assertEqual(24, self.game.score())
 
 
+    def test_two_consecutive_strikes(self):
+        """
+        Test that 2 strikes in a row are scored correctly
+        """
+        self.game.roll(10)
+        self.game.roll(10)
+        self.game.roll(3)
+        self.game.roll(4)
+        self.row_many(14, 0)
+        self.assertEqual(47, self.game.score())
+
+
 if __name__ == "__main__":
     unittest.main()
