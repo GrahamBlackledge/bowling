@@ -52,6 +52,17 @@ class TestBowlingGame(unittest.TestCase):
         self.row_many(14, 0)
         self.assertEqual(47, self.game.score())
 
+    def test_single_spare(self):
+
+        """ Test that a single spare is scored corectly
+        Spare => 10 plus next roll as a bonus"""
+
+        self.game.roll(5)
+        self.game.roll(5)  
+        self.game.roll(3)
+        self.roll_many(17, 0)
+        self.assertEqual(16, self.game.score())
+
 
 if __name__ == "__main__":
     unittest.main()
