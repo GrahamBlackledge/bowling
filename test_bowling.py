@@ -102,6 +102,16 @@ class TestBowlingGame(unittest.TestCase):
         self.game.roll(4)
         self.assertEqual(14, self.game.score())
 
+   
+    def test_all_strikes(self):
+        """Test to check a perfect game, 12 strikes"""
+
+        for _ in range(12):
+            self.game.roll(10) 
+
+        self.assertEqual(300, self.game.score())
+
+
 
 
 
