@@ -91,6 +91,19 @@ class TestBowlingGame(unittest.TestCase):
         self.assertEqual(17, self.game.score())
 
 
+    def test_10th_frame_spare(self): 
+        """ Test getting a spare in the 10th frame.
+            this gives the player 1 bonus roll"""
+        
+        self.roll_many(18, 0)
+
+        self.game.roll(7)
+        self.game.roll(3)
+        self.game.roll(4)
+        self.assertEqual(14, self.game.score())
+
+
+
 
 
     
