@@ -48,16 +48,20 @@ class BowlingGame:
                     score += self.rolls[frame_index + 1]
                 if (frame_index + 2) < len(self.rolls):
                    score +=  self.roll[frame_index + 2]
-        elif self._is_spare(frame_index):             # spare
-            score += 10                          
-            if (frame_index + 2) < len(self.rolls):
-                score += self.rolls[frame_index + 2]
+            elif self._is_spare(frame_index):
+            # Spare
+                score += 10
+                if (frame_index + 2) < len(self.rolls):
+                    score += self.rolls[frame_index + 2]
         else:
             # Open frame
             if (frame_index + 1) < len(self.rolls):
                 score += self.rolls[frame_index] + self.rolls[frame_index + 1]
             else:
-                score += self.rolls[frame_index]           
+                score += self.rolls[frame_index]
+
+            
+                          
 
         return score
 
