@@ -27,19 +27,25 @@ class BowlingGame:
         frame_index = 0
 
         for frame in range(9):
+            print(f"DEBUG: Frame {frame}, index={frame_index}, roll1={self.rolls[frame_index]}, roll2={self.rolls[frame_index+1]} (if in range)")
             if self._is_strike(frame_index):
+                print("DEBUG: Detected STRIKE in frames 1-9")
                 # Strike
                 score += 10 + self._strike_bonus(frame_index)
                 frame_index += 1
             elif self._is_spare(frame_index):
+                print("DEBUG: Detected SPARE in frames 1-9")
                 # Spare
                 score += 10 + self._spare_bonus(frame_index)
                 frame_index += 2
             else:
+                print("DEBUG: Detected OPEN frame in frames 1-9")
                 # Open frame ---- Now adds both rolls 
                 score += self.rolls[frame_index] + self.rolls[frame_index + 1]
                 frame_index += 2
-
+        print(f"DEBUG: Exiting frames 1-9 with frame_index={frame_index}")
+            
+            
             # Logic for handling 10th frame
         if frame_index < len(self.rolls):
             if self._is_strike(frame_index):   #strike
@@ -55,14 +61,14 @@ class BowlingGame:
                 score += 10
                 if (frame_index + 2) < len(self.rolls):
                     score += self.rolls[frame_index + 2]
-        else:
-            # Open frame
-            if (frame_index + 1) < len(self.rolls):
-                print("DEBUG 10th frame: OPEN path")
-                print(f"DEBUG 10th frame: Indices {frame_index}, {frame_index+1}")
-                score += self.rolls[frame_index] + self.rolls[frame_index + 1]
             else:
-                score += self.rolls[frame_index]
+                # Open frame
+                if (frame_index + 1) < len(self.rolls):
+                    print("DEBUG 10th frame: OPEN path")
+                    print(f"DEBUG 10th frame: Indices {frame_index}, {frame_index+1}")
+                    score += self.rolls[frame_index] + self.rolls[frame_index + 1]
+                else:
+                    score += self.rolls[frame_index]
 
             
                           
