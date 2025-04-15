@@ -53,12 +53,12 @@ class BowlingGame:
                 score += 10
                 if (frame_index + 2) < len(self.rolls):
                     score += self.rolls[frame_index + 2]
-        else:
-            # Open frame
-            if (frame_index + 1) < len(self.rolls):
-                score += self.rolls[frame_index] + self.rolls[frame_index + 1]
             else:
-                score += self.rolls[frame_index]
+                # Open frame
+                if (frame_index + 1) < len(self.rolls):
+                    score += self.rolls[frame_index] + self.rolls[frame_index + 1]
+                else:
+                    score += self.rolls[frame_index]
 
             
                           
