@@ -22,7 +22,7 @@ class BowlingGame:
         self.current_roll += 1
 
     def score(self):
-        """Calculate the score for the current game."""
+        """Calculate the score for the curent game."""
         score = 0
         frame_index = 0
 
