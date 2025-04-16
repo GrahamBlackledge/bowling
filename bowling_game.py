@@ -29,7 +29,18 @@ class BowlingGame:
 
 
     def _score_frames_1_to_9(self):
-        #Handles acoring for frames 1 to 9
+        """ Calculate the score for frames 1 through 9.
+
+    Iterates through the first nine frames and adds points based on
+    strike, spare, or open-frame logic. Updates the roll index as
+    needed.
+
+    Returns:
+        tuple:
+            - int: The total score for frames 1–9.
+            - int: The new roll index after processing nine frames. """
+
+        
         score = 0
         frame_index = 0
 
@@ -52,7 +63,19 @@ class BowlingGame:
             
         
     def _score_10th_frame(self, frame_index):
-       #Handles 10th frame logic
+        """ Calculate the score for the 10th (final) frame.
+
+    The 10th frame may allow up to three rolls if a strike or spare is
+    scored. Adds base points plus any bonus rolls. Returns 0 if there
+    are no rolls left.
+
+    Args:
+        frame_index (int): The starting roll index for the 10th frame.
+
+    Returns:
+        int: The total score for the 10th frame, including any bonuses.  
+            """
+      
         if frame_index >= len(self.rolls):
             return 0  # No rolls to process
 
