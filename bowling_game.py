@@ -23,10 +23,17 @@ class BowlingGame:
 
     def score(self):
         """Calculate the score for the curent game."""
+        score, frame_index = self._score_frames_1_to_9()
+        score += self._score_10th_frame(frame_index)
+        return score
+
+
+    def _score_frames_1_to_9(self):
+        #Handles acoring for frames 1 to 9
         score = 0
         frame_index = 0
 
-        for frame in range(9):
+        for _ in range(9):
             if self._is_strike(frame_index):
                 # Strike
                 score += 10 + self._strike_bonus(frame_index)
@@ -39,31 +46,32 @@ class BowlingGame:
                 # Open frame ---- Now adds both rolls 
                 score += self.rolls[frame_index] + self.rolls[frame_index + 1]
                 frame_index += 2
-
-            # Logic for handling 10th frame
-        if frame_index < len(self.rolls):
-            if self._is_strike(frame_index):   #strike
-                score += 10   
-                if (frame_index + 1) < len(self.rolls):  
-                    score += self.rolls[frame_index + 1]
-                if (frame_index + 2) < len(self.rolls):
-                   score +=  self.rolls[frame_index + 2]
-            elif self._is_spare(frame_index):
-            # Spare
-                score += 10
-                if (frame_index + 2) < len(self.rolls):
-                    score += self.rolls[frame_index + 2]
-            else:
-                # Open frame
-                if (frame_index + 1) < len(self.rolls):
-                    score += self.rolls[frame_index] + self.rolls[frame_index + 1]
-                else:
-                    score += self.rolls[frame_index]
+        
+        return score, frame_index
 
             
-                          
+        
+    def _score_10th_frame(self, frame_index):
+       #Handles 10th frame logic
+        if frame_index >= len(self.rolls):
+            return 0  # No rolls to process
 
-        return score
+        if self._is_strike(frame_index):  #Strike
+            base = 10
+            bonus1 = self.rolls[frame_index + 1] if (frame_index + 1) < len(self.rolls) else 0
+            bonus2 = self.rolls[frame_index + 2] if (frame_index + 2) < len(self.rolls) else 0
+            return base + bonus1 + bonus2
+
+        elif self._is_spare(frame_index): #spare
+            base = 10
+            bonus = self.rolls[frame_index + 2] if (frame_index + 2) < len(self.rolls) else 0
+            return base + bonus
+
+        else:
+            # Open frame
+            roll1 = self.rolls[frame_index] if (frame_index) < len(self.rolls) else 0
+            roll2 = self.rolls[frame_index + 1] if (frame_index + 1) < len(self.rolls) else 0
+            return roll1 + roll2
 
     def _is_strike(self, frame_index):
         """
